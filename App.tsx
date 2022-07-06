@@ -1,18 +1,22 @@
-import { StyleSheet, Text, View } from 'react-native';
+import {
+  DarkTheme,
+  DefaultTheme,
+  NavigationContainer,
+} from "@react-navigation/native";
+import React from "react";
+import { useColorScheme } from "react-native";
+import { BottomTabNavigator } from "./bottomTabs/BottomTabNavigator";
+import { ThemeProvider } from "./theme/ThemeContext";
 
-export default function App() {
+export default (): JSX.Element => {
+  const scheme = useColorScheme();
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-    </View>
+    <ThemeProvider>
+      <NavigationContainer
+        theme={scheme === "light" ? DefaultTheme : DarkTheme}
+      >
+        <BottomTabNavigator />
+      </NavigationContainer>
+    </ThemeProvider>
   );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+};
